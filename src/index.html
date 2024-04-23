@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Visualization</title>
+        <script src="../node_modules/three/build/three.js"></script>
+        <script src="../node_modules/three/examples/js/controls/OrbitControls.js"></script>
+        <script src="../node_modules/three/build/THREE.MeshLine.js"></script>
+        <script src="./conectWs.js"></script>
+    </head>
+    <body onload="connectWs()">
+        <!-- Navbar -->
+        <div id="top-nav">
+            <nav class="navbar navbar-expand-lg navbar-fixed-top">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav d-flex justify-content-between">
+                            <li class="nav-item ml">
+                                <a class="nav-link active" aria-current="page" href="#">
+                                    <img src="img/rover.png" alt="rover" height="35px" />
+                                </a>
+                            </li>
+                            <li class="nav-visualization">
+                                <a class="nav-link" href="index.html" style="font-family: Verdana, Geneva, sans-serif; color: #fff; text-decoration: none">
+                                    <i class="fa fa-television" aria-hidden="true"></i>
+                                    Visualization</a
+                                >
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto align-middle">
+                            <li class="nav-item" style="padding-right: 100px">
+                                <img src="./img/fmlx_logo_white.png" alt="FORMULATRIX" height="30px" style="margin-top: 10px" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row justify-content-between">
+                <div class="col">
+                    <div class="roversThreeJs">
+                        <script src="./rovers-three.js"></script>
+                        <script src="./rovers-material.js"></script>
+                        <script src="./update-position.js"></script>
+                        <script src="./nameVertices.js"></script>
+                        <script src="./tripRovers.js"></script>
+                        <script src="./beam-track.js"></script>
+                        <script src="./sidePanel.js"></script>
+                    </div>
+                </div>
+
+                <!-- Side Panel -->
+                <div class="col" style="font-family: Verdana, Geneva, sans-serif; background-color: rgb(242, 242, 242)">
+                    <div class="sidebar-header" style="margin: 20px; border-bottom: 2px solid #797979">
+                        <h3 style="color: #565656; font-size: 20px">
+                            <strong>Information</strong>
+                        </h3>
+                    </div>
+
+                    <div class="row justify-content-start">
+                        <div class="col">
+                            <button class="btn btn-secondary" style="width: 120px; font-size: small; font-weight: 600; margin-left: 10px; padding-left: 0px; margin-top: 10px" type="button">Rover List</button>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-start">
+                        <div class="card" style="width: 350px; margin-left: 20px">
+                            <div class="card-body">
+                                <div class="accordion" id="myAccordion" style="width: 280px">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne" style="background-color: #f8f9fa; font-size: small" id="rvr1">Rover 1</button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse my-0" data-bs-parent="#myAccordion">
+                                            <div class="card-body">
+                                                <p style="font-weight: 400; font-size: 12px" id="roversName1"></p>
+                                                <p style="font-weight: 400; font-size: 12px">Rover's Color : <i class="fa fa-square" aria-hidden="true" id="roversColor1"></i></p>
+                                                <p style="font-weight: 400; font-size: 12px" id="roversPlate1"></p>
+                                                <p style="font-weight: 400; font-size: 12px" id="roversStatus1"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" style="background-color: #f8f9fa; font-size: small" id="rvr2">Rover 2</button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#myAccordion">
+                                            <div class="card-body">
+                                                <p style="font-weight: 400; font-size: 12px" id="roversName2"></p>
+                                                <p style="font-weight: 400; font-size: 12px">Rover's Color : <i class="fa fa-square" aria-hidden="true" id="roversColor2"></i></p>
+                                                <p style="font-weight: 400; font-size: 12px" id="roversPlate2"></p>
+                                                <p style="font-weight: 400; font-size: 12px" id="roversStatus2"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingThree">
+                                            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" style="background-color: #f8f9fa; font-size: small" id="rvr3">Rover 3</button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#myAccordion">
+                                            <div class="card-body">
+                                                <p style="font-weight: 400; font-size: 12px" id="roversName3"></p>
+                                                <p style="font-weight: 400; font-size: 12px" id="roversColor3">Rover Color : <i class="fa fa-square" aria-hidden="true"></i></p>
+                                                <p style="font-weight: 400; font-size: 12px" id="roversPlate3"></p>
+                                                <p style="font-weight: 400; font-size: 12px" id="roversStatus3"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-start">
+                        <div class="col">
+                            <button class="btn btn-secondary" style="width: 120px; font-size: small; font-weight: 600; margin-left: 10px; padding-left: 0px; margin-top: 20px" type="button">View Angle</button>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-start">
+                        <div class="card" style="width: 350px; margin-left: 20px">
+                            <div class="card-body">
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnTopView" autocomplete="off" checked />
+                                    <label class="btn btn-outline-secondary border" for="btnTopView" style="background-color: #f8f9fa; color: #313131; font-size: smaller"> Top View</label>
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnFrontView" autocomplete="off" />
+                                    <label class="btn btn-outline-secondary border" for="btnFrontView" style="background-color: #f8f9fa; color: #313131; padding: 5px; font-size: smaller"> Front View</label>
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnIsometricView" autocomplete="off" />
+                                    <label class="btn btn-outline-secondary border" for="btnIsometricView" style="background-color: #f8f9fa; color: #313131; font-size: smaller"> Isometric View</label>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-secondary mt-2 btn-sm" id="btnRefresh">
+                                        <a href="index.html" style="color: white; text-decoration: none;" ><i class="fa fa-refresh"></i> REFRESH</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer" style="position: fixed; width: 100%; background: #222; font-size: small">
+            <div id="footer-warp">
+                <p style="color: #fff" class="text-center">FORMULATRIX</p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    </body>
+</html>
